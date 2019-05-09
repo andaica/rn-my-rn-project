@@ -2,8 +2,7 @@ import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
 export interface Props {
-  name: string;
-  enthusiasmLevel?: number;
+  navigation?: any,
 }
 
 interface State {
@@ -14,12 +13,8 @@ export class Hello extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    if ((props.enthusiasmLevel || 0) <= 0) {
-      throw new Error('You could be a little more enthusiastic. :D');
-    }
-
     this.state = {
-      enthusiasmLevel: props.enthusiasmLevel || 1,
+      enthusiasmLevel: 1,
     };
   }
 
@@ -30,12 +25,13 @@ export class Hello extends React.Component<Props, State> {
   getExclamationMarks = (numChars: number) => Array(numChars + 1).join('!');
 
   render() {
+    const { navigation } = this.props;
+    const name = navigation.getParam('name') || "Andaica";
     return (
       <View style={styles.root}>
         <Text style={styles.greeting}>
           Hello{' '}
-          {this.props.name +
-            this.getExclamationMarks(this.state.enthusiasmLevel)}
+          {name + this.getExclamationMarks(this.state.enthusiasmLevel)}
         </Text>
 
         <View style={styles.buttons}>
@@ -82,5 +78,6 @@ const styles = StyleSheet.create({
   greeting: {
     color: '#999',
     fontWeight: 'bold',
+    fontSize: 24,
   },
 });
