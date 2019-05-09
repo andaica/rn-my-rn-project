@@ -13,6 +13,6 @@ npm install or yarn
 
 Comming soon...
 
-## Hướng dẫn sử dụng
+## Guide
 
 Comming soon...
