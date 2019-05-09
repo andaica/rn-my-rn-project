@@ -4,6 +4,7 @@ import {
   TextInput, TouchableOpacity, ScrollView,
   KeyboardAvoidingView, Alert
 } from 'react-native';
+import I18n from '../../utils/i18n';
 
 interface Props {
   navigation?: any,
@@ -43,7 +44,7 @@ export class LoginScreen extends React.Component<Props, State>{
         </View>
 
         <View style={styles.mainContainer}>
-          <Text style={styles.welcome}>WELCOME</Text>
+          <Text style={styles.welcome}>{I18n.t("LOGIN.welcome")}</Text>
 
           <View style={styles.formLogin}>
             <TextInput
@@ -54,25 +55,25 @@ export class LoginScreen extends React.Component<Props, State>{
             />
             <TextInput
               style={[styles.password, styles.formInput]}
-              placeholder="Password"
+              placeholder={I18n.t("LOGIN.password")}
               onChangeText={(text) => this.setState({ password: text })}
               secureTextEntry={true}
             />
 
-            <Text style={styles.passForgotLink}>Forgot password?</Text>
+            <Text style={styles.passForgotLink}>{I18n.t("LOGIN.forgotPassword")}</Text>
 
             <TouchableOpacity
               style={styles.loginButton}
               onPress={this.login}
             >
-              <Text style={styles.loginText}> SIGN IN </Text>
+              <Text style={styles.loginText}> {I18n.t("LOGIN.signin")} </Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerLink}>Don't have an account?</Text>
-          <Text style={[styles.footerLink, { color: 'red' }]}>Create new account</Text>
+          <Text style={styles.footerLink}>{I18n.t("LOGIN.notHaveAccount")}</Text>
+          <Text style={[styles.footerLink, { color: 'red' }]}>{I18n.t("LOGIN.createAccount")}</Text>
         </View>
       </KeyboardAvoidingView>
     );
