@@ -18,7 +18,9 @@
     "babel-jest": "^24.8.0",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.54.0",
+    "react-native-gesture-handler": "^1.2.1",
     "react-native-typescript-transformer": "^1.2.12",
+    "react-navigation": "^3.9.1",
     "react-test-renderer": "16.8.3",
     "typescript": "^3.4.5"
   },
