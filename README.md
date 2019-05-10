@@ -1,12 +1,16 @@
 # rn-my-rn-project
 demo project with react native + typescript + mobx + localize
 
-### Libraries
+> We were referred a project of OWS company named `cloud class`. 
 
-### Install
+## Libraries
+
+## Installation
 
 ```
-npm install or yarn
+npm install
+or
+yarn
 ```
 
 ## DEMO
@@ -16,3 +20,7 @@ Comming soon...
 ## Guide
 
 Comming soon...
+
+## TODO
+- Auto change app language when system language change
+- Write down the project structure 
