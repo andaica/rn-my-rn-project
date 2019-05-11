@@ -5,11 +5,12 @@ import {
   KeyboardAvoidingView, Alert
 } from 'react-native';
 import I18n from '../../utils/i18n';
+import { inject, observer } from 'mobx-react';
 
 interface Props {
   navigation?: any,
-  uiStore?: any,
-  sessionStore?: any;
+  shopStore?: any,
+  memberStore?: any;
 }
 
 interface State {
@@ -17,6 +18,8 @@ interface State {
   password: string,
 }
 
+@inject('memberStore')
+@observer
 export class LoginScreen extends React.Component<Props, State>{
   
   constructor(props: Props) {
@@ -27,10 +30,12 @@ export class LoginScreen extends React.Component<Props, State>{
     };
   }
 
-  login = () => {
+  async login() {
     const { navigate } = this.props.navigation;
     console.log('Click Login : email: ' + this.state.email + ", pass: " + this.state.password);
-    navigate('Hello', { name: this.state.email });
+    let result = await this.props.memberStore.login(this.state.email, this.state.password);
+    console.log("Login result: ", result, this.props.memberStore.user);
+    // navigate('Hello', { name: this.state.email });
   }
 
   render() {
@@ -44,7 +49,7 @@ export class LoginScreen extends React.Component<Props, State>{
         </View>
 
         <View style={styles.mainContainer}>
-          <Text style={styles.welcome}>{I18n.t("LOGIN.welcome")}</Text>
+          <Text style={styles.welcome}>{I18n.t("LOGIN.welcome") + ", " + this.props.memberStore.user.name}</Text>
 
           <View style={styles.formLogin}>
             <TextInput
@@ -64,7 +69,7 @@ export class LoginScreen extends React.Component<Props, State>{
 
             <TouchableOpacity
               style={styles.loginButton}
-              onPress={this.login}
+              onPress={this.login.bind(this)}
             >
               <Text style={styles.loginText}> {I18n.t("LOGIN.signin")} </Text>
             </TouchableOpacity>

@@ -7,16 +7,20 @@
  */
 
 import React, { Component } from 'react';
-import {View} from 'react-native';
+import { SafeAreaView } from 'react-native';
 import RootStackContainer from './navigation/RootStackNavigator';
+import { Provider } from "mobx-react";
+import stores from "./stores";
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={{flex: 1, position: 'relative'}}>
-        <RootStackContainer/>
-      </View>
+      <Provider {...stores}>
+        <SafeAreaView style={{ flex: 1, position: 'relative' }}>
+          <RootStackContainer />
+        </SafeAreaView>
+      </Provider>
     );
   }
 }
