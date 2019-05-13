@@ -1,4 +1,5 @@
-import { observable, computed, action } from 'mobx';
+import { observable, action, flow } from 'mobx';
+import API from '../services/api';
 import { AsyncStorage } from 'react-native';
 
 class MemberData {
@@ -34,29 +35,49 @@ class MemberData {
 
 export default class MemberStore {
     @observable user = new MemberData();
-    @observable isLogined : boolean = false;
+    @observable isLogined: boolean = false;
     @observable accesskey = '';
 
     @action async login(email: string, password: string) {
         let result: any = {};
 
-        if(!email || !password) {
+        if (!email || !password) {
             result = {
                 status: "NG",
-                message: "Invalid email or password"
+                error: "Invalid email or password"
             }
-            return result;
+        } else {
+            let [err, res] = await API.userService.login(email, password);
+            result = this.convertResultFromAPI(err, res);
+
+            if(result.status == "OK") {
+                this.isLogined = true;
+                await AsyncStorage.setItem('@Session:accesskey', result.accesskey);
+                return this.fetchUserData();
+            }
         }
 
-        // TODO: call API login
-        let self = this;
-        setTimeout(function() {
-            self.user.setUserData({id: 1, name: "Andaica", user_type: "30"});
-        }, 2000);
-        
-        result = {
-            status: "OK",
-            message: "Login success"
+        return result;
+    }
+
+    @action async fetchUserData() {
+        let [err, res] = await API.memberService.getPrivate();
+        let result = this.convertResultFromAPI(err, res);
+        if(result.status == "OK") {
+            this.user.setUserData(result.member);
+        }
+        return result;
+    }
+
+    convertResultFromAPI(err: any, res: any) {
+        let result: any = {};
+        if(err) {
+            result = {
+                status: "NG",
+                error: err.toString()
+            }
+        } else {
+            result = res;
         }
         return result;
     }

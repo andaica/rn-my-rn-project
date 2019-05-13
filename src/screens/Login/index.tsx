@@ -34,8 +34,8 @@ export class LoginScreen extends React.Component<Props, State>{
     const { navigate } = this.props.navigation;
     console.log('Click Login : email: ' + this.state.email + ", pass: " + this.state.password);
     let result = await this.props.memberStore.login(this.state.email, this.state.password);
-    console.log("Login result: ", result, this.props.memberStore.user);
-    // navigate('Hello', { name: this.state.email });
+    console.log("Login result: ", result);
+    navigate('Hello', { name: this.props.memberStore.user.name });
   }
 
   render() {
@@ -49,7 +49,7 @@ export class LoginScreen extends React.Component<Props, State>{
         </View>
 
         <View style={styles.mainContainer}>
-          <Text style={styles.welcome}>{I18n.t("LOGIN.welcome") + ", " + this.props.memberStore.user.name}</Text>
+          <Text style={styles.welcome}>{I18n.t("LOGIN.welcome")}</Text>
 
           <View style={styles.formLogin}>
             <TextInput

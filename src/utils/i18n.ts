@@ -5,7 +5,7 @@ import en from "../assets/locales/en";
 import vi from "../assets/locales/vi";
 
 const locales = RNLocalize.getLocales();
-console.log("abcd: ", locales);
+console.log("I18n locales: ", locales);
 
 if (Array.isArray(locales)) {
   I18n.locale = locales[0].languageTag;
