@@ -1,6 +1,6 @@
 import { observable, action, flow } from 'mobx';
 import API from '../services/api';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class MemberData {
     @observable id = '';
