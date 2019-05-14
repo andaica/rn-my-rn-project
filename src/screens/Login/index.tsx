@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react';
 
 interface Props {
   navigation?: any,
-  shopStore?: any,
+  uiStore?: any,
   memberStore?: any;
 }
 
@@ -19,6 +19,7 @@ interface State {
 }
 
 @inject('memberStore')
+@inject('uiStore')
 @observer
 export class LoginScreen extends React.Component<Props, State>{
   
@@ -33,7 +34,9 @@ export class LoginScreen extends React.Component<Props, State>{
   async login() {
     const { navigate } = this.props.navigation;
     console.log('Click Login : email: ' + this.state.email + ", pass: " + this.state.password);
+    this.props.uiStore.showLoadingScreen();
     let result = await this.props.memberStore.login(this.state.email, this.state.password);
+    this.props.uiStore.hideLoadingScreen();
     console.log("Login result: ", result);
     navigate('Hello', { name: this.props.memberStore.user.name });
   }
