@@ -6,156 +6,69 @@ import {
 } from 'react-native';
 import I18n from '../../utils/i18n';
 import { inject, observer } from 'mobx-react';
+import { Container, Content, Icon, Label, Right, Button,Footer} from "native-base";
+import styles from "./styles";
+const topBg = require("../../assets/common/img_logo_01.png");
+import LinearGradient from 'react-native-linear-gradient';
 
 interface Props {
   navigation?: any,
   shopStore?: any,
   memberStore?: any;
+  loginForm?: any;
+	onLogin?: Function;
 }
 
-interface State {
-  email: string,
-  password: string,
-}
+interface State {}
 
-@inject('memberStore')
 @observer
-export class LoginScreen extends React.Component<Props, State>{
+class LoginScreen extends React.Component<Props, State>{
   
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      email: "",// user has not logged in yet
-      password: "",
-    };
-  }
-
-  async login() {
-    const { navigate } = this.props.navigation;
-    console.log('Click Login : email: ' + this.state.email + ", pass: " + this.state.password);
-    let result = await this.props.memberStore.login(this.state.email, this.state.password);
-    console.log("Login result: ", result);
-    navigate('Hello', { name: this.props.memberStore.user.name });
-  }
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
-        <View style={styles.logoContainer}>
-          <Image
-            style={styles.logo}
-            source={require('../../assets/images/logo.png')}
-          />
-        </View>
+      <Container style={ styles.container}>
+			 <ScrollView>
+				<LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#35b3cc', '#619de7']} style={styles.linearGradient}>
+					<View style={{ width: 300 }}>
+						<Image
+							source={topBg}
+							style={styles.imageHeader}
+						/>
+					</View>
+					<Right>
+						<View style={{ flexDirection: "row",marginRight: -10 }}>
+							<Button block style={styles.buttoninfo} bordered info onPress={() => { }}>
+								<View style={{ flexDirection: "row" }}>
+									<Label style={{ color: '#ffff',fontSize:10 }}>問合せフォーム</Label>
+								</View>
+							</Button>
+							<Button block style={styles.buttoninfo} bordered info onPress={() => { }}>
+								<View style={{ flexDirection: "row" }}>
+									<Label style={{ color: '#ffff',fontSize:10 }}>問合せフォーム</Label>
+								</View>
+							</Button>
+						</View>
+					</Right>
 
-        <View style={styles.mainContainer}>
-          <Text style={styles.welcome}>{I18n.t("LOGIN.welcome")}</Text>
-
-          <View style={styles.formLogin}>
-            <TextInput
-              style={[styles.email, styles.formInput]}
-              placeholder="Email"
-              onChangeText={(text) => this.setState({ email: text })}
-              keyboardType="email-address"
-            />
-            <TextInput
-              style={[styles.password, styles.formInput]}
-              placeholder={I18n.t("LOGIN.password")}
-              onChangeText={(text) => this.setState({ password: text })}
-              secureTextEntry={true}
-            />
-
-            <Text style={styles.passForgotLink}>{I18n.t("LOGIN.forgotPassword")}</Text>
-
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={this.login.bind(this)}
-            >
-              <Text style={styles.loginText}> {I18n.t("LOGIN.signin")} </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerLink}>{I18n.t("LOGIN.notHaveAccount")}</Text>
-          <Text style={[styles.footerLink, { color: 'red' }]}>{I18n.t("LOGIN.createAccount")}</Text>
-        </View>
-      </KeyboardAvoidingView>
+				</LinearGradient>
+				
+				<View style={styles.body}>
+					<View>
+						<View style={{ flexDirection: "row" }}>
+						<Icon name="lock-open" type='SimpleLineIcons' style={styles.icon}></Icon>
+						<Text style={styles.textheader} > ユーザーログイン</Text>
+						</View>
+						<Label style={styles.text}>「面接・面談・録画面接」か「マイページ」を選択し、ログイン情報を入力しましょう。</Label>
+					</View>
+				</View>
+				<Content >
+					{this.props.loginForm}
+				</Content>
+				</ScrollView>
+				
+			</Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F6F7',
-  },
-  logoContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 120
-  },
-  logo: {
-    width: 212,
-    height: 90
-  },
-  mainContainer: {
-    flex: 2
-  },
-  welcome: {
-    fontSize: 24,
-    textAlign: 'center',
-    margin: 10,
-    color: '#5B5A5A',
-    letterSpacing: 5
-  },
-  formLogin: {
-    padding: 40,
-    paddingTop: 20
-  },
-  formInput: {
-    textAlign: 'left',
-    padding: 10,
-    height: 50,
-    color: '#5B5A5A',
-    fontSize: 14,
-    borderWidth: 1,
-    borderColor: '#CFD0D1'
-  },
-  email: {
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4
-  },
-  password: {
-    borderBottomLeftRadius: 4,
-    borderBottomRightRadius: 4
-  },
-  passForgotLink: {
-    textAlign: 'right',
-    marginTop: 10,
-    color: '#5B5A5A',
-    fontSize: 14,
-  },
-  loginButton: {
-    alignItems: 'center',
-    backgroundColor: '#129793',
-    height: 50,
-    borderRadius: 25,
-    padding: 15,
-    marginTop: 30
-  },
-  loginText: {
-    color: 'white'
-  },
-  footer: {
-    flex: 1,
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 20
-  },
-  footerLink: {
-    textAlign: 'center'
-  }
-});
+export default LoginScreen;
