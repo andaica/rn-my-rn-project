@@ -1,6 +1,6 @@
 import { observable, action, flow } from 'mobx';
 import API from '../services/api';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class MemberData {
     @observable id = '';
@@ -10,6 +10,7 @@ class MemberData {
     @observable telno = '';
     @observable gender = '';
     @observable user_type = '';
+
 
     setUserData(data: any) {
         let self = this as any;
@@ -31,12 +32,14 @@ class MemberData {
         this.gender = '';
         this.user_type = '';
     }
+    
 }
-
 export default class MemberStore {
     @observable user = new MemberData();
     @observable isLogined: boolean = false;
     @observable accesskey = '';
+    @observable email = "";
+    @observable password = "";
 
     @action async login(email: string, password: string) {
         let result: any = {};
@@ -80,5 +83,18 @@ export default class MemberStore {
             result = res;
         }
         return result;
+    }
+    @action
+    emailOnChange(email:any) {
+        this.email = email;
+    }
+    @action
+    passwordOnChange(pwd:any) {
+        this.password = pwd;
+    }
+    @action
+    clearDataLogin() {
+      this.email = "";
+      this.password = "";
     }
 }

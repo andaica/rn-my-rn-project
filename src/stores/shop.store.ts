@@ -1,5 +1,5 @@
 import { observable, computed, action } from 'mobx';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class ShopData {
     @observable id = '';

@@ -9,18 +9,23 @@
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-native';
 import RootStackContainer from './navigation/RootStackNavigator';
-import { Provider } from "mobx-react";
+import { Provider, inject } from "mobx-react";
 import stores from "./stores";
+import { HiddenUI } from './screens/HiddenUI';
+import { Root } from "native-base";
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <Provider {...stores}>
-        <SafeAreaView style={{ flex: 1, position: 'relative' }}>
-          <RootStackContainer />
-        </SafeAreaView>
-      </Provider>
+      <Root>
+        <Provider {...stores}>
+          <SafeAreaView style={{ flex: 1, position: 'relative' }}>
+            <HiddenUI />
+            <RootStackContainer />
+          </SafeAreaView>
+        </Provider>
+      </Root>
     );
   }
 }
