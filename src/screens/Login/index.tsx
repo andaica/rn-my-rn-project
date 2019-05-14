@@ -36,8 +36,9 @@ export class LoginScreen extends React.Component<Props, State>{
     console.log('Click Login : email: ' + this.state.email + ", pass: " + this.state.password);
     this.props.uiStore.showLoadingScreen();
     let result = await this.props.memberStore.login(this.state.email, this.state.password);
-    this.props.uiStore.hideLoadingScreen();
     console.log("Login result: ", result);
+    this.props.uiStore.hideLoadingScreen();
+    this.props.uiStore.showNotify("Login success!", "OK", () => {console.log("Close notify!")})
     navigate('Hello', { name: this.props.memberStore.user.name });
   }
 
