@@ -1,4 +1,4 @@
-package com.myrnproject;
+package com.mentore12week;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -13,7 +13,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "MyRNProject";
+        return "Mentore12Week";
     }
 
     @Override
