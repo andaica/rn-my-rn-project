@@ -1,16 +1,21 @@
-# rn-my-rn-project
-demo project with react native + typescript + mobx + localize
+# mentore-12-week
+Medcare new version of 12 week mental app
 
-> We were referred a project of OWS company named `cloud class`. 
+> Seed project: https://github.com/andaica/rn-my-rn-project
 
 ## Libraries
+- react-navigation
+- mobx & mobx-react
+- react-native-localize & i18n-js
+- react-native-loading-spinner-overlay
+- react-native-modal
+
 
 ## Installation
 
 ```
-npm install
-or
 yarn
+or npm install (not recommend)
 ```
 
 ## DEMO
@@ -22,5 +27,4 @@ Comming soon...
 Comming soon...
 
 ## TODO
-- Auto change app language when system language change
-- Write down the project structure 
+- Auto update code with code push
