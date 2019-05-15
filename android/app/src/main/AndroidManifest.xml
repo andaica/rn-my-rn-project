@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.myrnproject">
+  package="com.mentore12week">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
