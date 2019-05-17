@@ -13,8 +13,13 @@ import { Provider, inject } from "mobx-react";
 import stores from "./stores";
 import { HiddenUI } from './screens/HiddenUI';
 
+import CodePush from "react-native-code-push";
+
 type Props = {};
-export default class App extends Component<Props> {
+class MyApp extends Component<Props> {
+  componentWillMount() {
+    CodePush.sync({ updateDialog: { title: "An update is available!" } });
+  }
   render() {
     return (
       <Provider {...stores}>
@@ -26,3 +31,8 @@ export default class App extends Component<Props> {
     );
   }
 }
+
+let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME, installMode: CodePush.InstallMode.ON_NEXT_RESUME };
+const App = CodePush(codePushOptions)(MyApp);
+
+export default App;

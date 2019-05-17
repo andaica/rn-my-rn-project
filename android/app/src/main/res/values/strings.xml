@@ -1,3 +1,4 @@
 <resources>
+	<string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">rwkpJUWMow497W8yzaz4D1E60ovhBkY_Moc2N</string>
     <string name="app_name">Mentore12Week</string>
 </resources>
